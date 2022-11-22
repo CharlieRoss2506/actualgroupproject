@@ -1,8 +1,8 @@
-# Template repository for PH3010 Advanced Python
+# Repository for actualgroupproject - solving the Time-Dependant Schrodinger Equation
 
-This is a template repository demonstrating how to package a python project. The directory is structured as follows:
+The directory is structured as follows:
 ```
-template_project_PH3010_advanced_python/
+actualgroupproject/
 ├── .gitignore
 ├── LICENSE
 ├── README.md
@@ -22,6 +22,7 @@ template_project_PH3010_advanced_python/
 │       └── example.py
 └── tests/
         └── test_example.py
+
 ```
 
 Let's look at each element individually
