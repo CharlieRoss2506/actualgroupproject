@@ -15,10 +15,10 @@ from scipy.sparse import eye, diags
 import matplotlib.animation as animation
 
 
-# Input parameters
+# Inputting parameters
 Nx = 250
 
-#defining space & time variables
+# Defining space & time variables
 xmin = -5
 xmax = 5
 Nt = 100
@@ -26,7 +26,7 @@ tmin = 0
 tmax = 60
 
 
-# Calculate grid, potential, and initial wave function
+# Calculating grid, potential, and initial wave function
 x_array = np.linspace(xmin, xmax, Nx)
 t_array = np.linspace(tmin, tmax, Nt)
 
@@ -53,9 +53,9 @@ def V():
 
     exec(command, globals())
 
-    try:
+    try: 
         return f(x_array)
-    except:
+    except: # add exceptions for errors from program execution.
         print("\nV(x) input does not compute.")
         print("Please input a valid mathematical equation in Numpy format terms of x_array.")
         print("\nSome examples:")
@@ -74,28 +74,40 @@ Converting V into a Diagonal matrix and calculating small psi
 Vmatrix = diags(VV)
 psi = np.exp(-(x_array+2)**2)
 
+'''
+Calculating finite difference elements
+'''
 dt = t_array[1] - t_array[0]
 dx = x_array[1] - x_array[0]
 
-H = -0.5 * FinDiff(0, dx, 2).matrix(x_array.shape) + Vmatrix
+'''
+Calculating the Hamiltonian matrix
+'''
+H = -0.5 * FinDiff(0, dx, 2).matrix(x_array.shape) + Vmatrix 
+'''
+Note that FinDiff above is a way of representing our partial derivatives. 
+FinDiff objects behave like operators; they have a tuple of the form (axis, spacing, degree) in the argument list for each partial derivative.
+The last argument stands for the degree of the derivative (in our case 2).
+'''
 
 '''
-Apply boundary conditions to the Hamiltonian
+Applying boundary conditions to the Hamiltonian
 '''
 
 H[0, :] = H[-1, :] = 0
 H[0, 0] = H[-1, -1] = 1
 
 '''
-Calculating U
+Calculating matrix U, the discretized version of the time propagation operator in the Crank-Nicholson scheme
 '''
 
-I_plus = eye(Nx) + 1j * dt / 2. * H
+I_plus = eye(Nx) + 1j * dt / 2. * H # eye returns all elements to 0 except diagonal to 1.
 I_minus = eye(Nx) - 1j * dt / 2. * H
-U = inv(I_minus).dot(I_plus)
+U = inv(I_minus).dot(I_plus) 
 
-
-# making a list of all the calculations
+'''
+# Iterating over each time, appending each calculation of psi to make a list of all the calculations
+'''
 psi_list = []
 for t in t_array:
     psi = U.dot(psi)
@@ -104,7 +116,8 @@ for t in t_array:
 
 
 """
-Creates a Data file 
+We now have a numerical solution stored in our psi_list. 
+In order to visualize this, we plot in 2D
 """
 
 def download_data(Nx=500, xmin=-5, xmax=5, tmin=0, tmax=20, V_x='x**2'):
@@ -161,7 +174,7 @@ download_data(Nx, xmin, xmax, tmin, tmax, V_x=VV)
 
 
 """
-Plots and Animates Data
+Plotting and Animating our Data
 """
 
 fig, ax = plt.subplots()
@@ -170,7 +183,7 @@ ax.set_xlabel("x [arb units]")
 ax.set_ylabel("$|\Psi(x, t)|$", color="C0")
 
 ax_twin = ax.twinx()
-ax_twin.plot(x_array, VV, color="C1")
+ax_twin.plot(x_array, VV, color="C1") # where time increases vertically on the y-axis. Note the probability density moves back and forth
 ax_twin.set_ylabel("V(x) [arb units]", color="C1")
 
 line, = ax.plot([], [], color="C0", lw=2)
