@@ -108,8 +108,31 @@ for t in t_array:
     psi_list.append(np.abs(psi))
 
 
+    
+    while True:
+        data_input = input("\nWould you like to download a csv file of the data? (y/n)")
+        if data_input == 'y':
+
+            df = pd.DataFrame({'x': x, 'psi': psi_list})
+            df.to_csv('psi_data.csv')
+            print("\nData has been downloaded.")
+            break
+        elif data_input ==  'n':
+            print("\nNo download chosen. ")
+            break   
+        else:
+            print("\nInvalid response.")
+            print("Please enter... y (yes for download) or n (no download).")
+
+download_data(Nx, xmin, xmax, tmin, tmax, V()=VV)    
+    
+    
+    
+   
+    
+    
 """
-We now have a numerical solution stored in our psi_list. 
+We now have a numerical solution of simulated data (i.e. `psi_list`) saved to our disk.
 In order to visualize this, we plot the data in 2D
 """
 
