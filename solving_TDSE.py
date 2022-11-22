@@ -42,7 +42,7 @@ def solve_TDSE():
 
 
     def V():
-        String = str(input("Please input potential\n"))
+        String = str(input("Please input potential using Nummpy format\n"))
         command = """def f(x):
               return """ + String
 
@@ -52,7 +52,7 @@ def solve_TDSE():
             return f(x_array)
         except: # add exceptions for errors from program execution.
             print("\nV(x) input does not compute.")
-            print("Please input a valid mathematical equation in Numpy format terms of x_array.")
+            print("Please input a valid mathematical equation in Numpy format.")
             print("\nSome examples:")
             print("... x_array**2")
             print("... np.sin(x_array)")
