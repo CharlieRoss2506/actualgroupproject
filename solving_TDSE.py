@@ -57,10 +57,10 @@ def V():
         return f(x_array)
     except:
         print("\nV(x) input does not compute.")
-        print("Please input a valid mathematical equation in Numpy format terms of x.")
+        print("Please input a valid mathematical equation in Numpy format terms of x_array.")
         print("\nSome examples:")
-        print("... x**2")
-        print("... np.sin(x)")
+        print("... x_array**2")
+        print("... np.sin(x_array)")
         print("\nPlease see the documentation for more details")
         print("\nClosing programme...\n")
         exit()
