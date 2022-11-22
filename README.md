@@ -26,7 +26,7 @@ actualgroupproject/
 |       |__solving_tdse.py
 └── tests/
         └── test_example.py
-|__solving_TDSE.py
+|__Group_A_TDSEsol.py
 
 ```
-solving_TDSE, when istalled, will allow the user to call the function solve_TDSE() to return an animation of the wavefunction over time for an inputted potential V(x)
+Group_A_TDSEsol, when istalled, will allow the user to call the function solve_TDSE() to return an animation of the wavefunction over time for an inputted potential V(x)
