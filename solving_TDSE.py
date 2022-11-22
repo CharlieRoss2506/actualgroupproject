@@ -14,7 +14,7 @@ from scipy.sparse import eye, diags
 import matplotlib.animation as animation
 
 
-def solve_TDSE:
+def solve_TDSE():
     # Inputting parameters, defining space & time variables
     Nx = 250
     xmin = -5
