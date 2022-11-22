@@ -15,21 +15,13 @@ from scipy.sparse import eye, diags
 import matplotlib.animation as animation
 
 
-# Inputting parameters
+# Inputting parameters, defining space & time variables
 Nx = 250
-
-# Defining space & time variables
 xmin = -5
 xmax = 5
 Nt = 100
 tmin = 0
 tmax = 60
-
-
-# Calculating grid, potential, and initial wave function
-x_array = np.linspace(xmin, xmax, Nx)
-t_array = np.linspace(tmin, tmax, Nt)
-
 
 '''
 READ BEFORE INPUTTING POTENTIALS
@@ -37,11 +29,14 @@ When inputting own potentials use the variable x_array
 Numpy packages can be used to form a string as the potential
 '''
 
+# Calculating grid, potential, and initial wave function
+x_array = np.linspace(xmin, xmax, Nx)
+t_array = np.linspace(tmin, tmax, Nt)
+
+
 '''
 Defining a function to be returned as the default potential 
 '''
-
-
 def f(x_array):
     return x_array**2
 
@@ -93,20 +88,18 @@ The last argument stands for the degree of the derivative (in our case 2).
 '''
 Applying boundary conditions to the Hamiltonian
 '''
-
 H[0, :] = H[-1, :] = 0
 H[0, 0] = H[-1, -1] = 1
 
 '''
 Calculating matrix U, the discretized version of the time propagation operator in the Crank-Nicholson scheme
 '''
-
 I_plus = eye(Nx) + 1j * dt / 2. * H # eye returns all elements to 0 except diagonal to 1.
 I_minus = eye(Nx) - 1j * dt / 2. * H
 U = inv(I_minus).dot(I_plus) 
 
 '''
-# Iterating over each time, appending each calculation of psi to make a list of all the calculations
+Iterating over each time, appending each calculation of psi to make a list of all the calculations
 '''
 psi_list = []
 for t in t_array:
@@ -117,64 +110,7 @@ for t in t_array:
 
 """
 We now have a numerical solution stored in our psi_list. 
-In order to visualize this, we plot in 2D
-"""
-
-def download_data(Nx=500, xmin=-5, xmax=5, tmin=0, tmax=20, V_x='x**2'):
-
-    # Calculate grid, and initial wave function
-    Nt = Nx
-    x = np.linspace(xmin, xmax, Nx)
-    t_array = np.linspace(tmin, tmax, Nt)
-    psi = np.exp(-(x+2)**2)
-
-    # Calculate finite difference elements
-    dt = t_array[1] - t_array[0]
-    dx = x[1] - x[0]
-
-    # Put V(x) array values into the diagonal elements of an empty matrix
-    V_x_matrix = diags(VV)
-
-    # Calculate the Hamiltonian matrix
-    H = -0.5 * FinDiff(0, dx, 2).matrix(x.shape) + V_x_matrix
-
-    # Apply boundary conditions to the Hamiltonian
-    H[0, :] = H[-1, :] = 0
-    H[0, 0] = H[-1, -1] = 1
-
-    # Calculate U
-    I_plus = eye(Nx) + 1j * dt / 2. * H
-    I_minus = eye(Nx) - 1j * dt / 2. * H
-    U = inv(I_minus).dot(I_plus)
-
-    # Iterate over each time, appending each calculation of psi to a list
-    psi_list = []
-    for t in t_array:
-        psi = U.dot(psi)
-        psi[0] = psi[-1] = 0
-        psi_list.append(np.abs(psi))
-
-    while True:
-        data_input = input("\nWould you like to download a csv file of the data? (y/n)")
-        if data_input == 'y':
-
-            df = pd.DataFrame({'x': x, 'psi': psi_list})
-            df.to_csv('psi_data.csv')
-            print("\nData has been downloaded.")
-            break
-        elif data_input ==  'n':
-            print("\nNo download chosen. ")
-            break   
-        else:
-            print("\nInvalid response.")
-            print("Please enter... y (yes for download) or n (no download).")
-
-
-download_data(Nx, xmin, xmax, tmin, tmax, V_x=VV)
-
-
-"""
-Plotting and Animating our Data
+In order to visualize this, we plot the data in 2D
 """
 
 fig, ax = plt.subplots()
@@ -197,6 +133,9 @@ def run(psi):
 ax.set_xlim(x_array[0], x_array[-1])
 ax.set_ylim(0, 1)
 
+'''
+A better, more cohesive way of viewing the data is with an animation
+'''
 ani = animation.FuncAnimation(fig, run, psi_list, interval=10)
 
 plt.show()
