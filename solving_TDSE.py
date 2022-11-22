@@ -57,10 +57,11 @@ def V():
         return f(x_array)
     except:
         print("\nV(x) input does not compute.")
-        print("Please input a valid mathematical equation in terms of x.")
+        print("Please input a valid mathematical equation in Numpy format terms of x.")
         print("\nSome examples:")
         print("... x**2")
         print("... np.sin(x)")
+        print("\nPlease see the documentation for more details")
         print("\nClosing programme...\n")
         exit()
 
@@ -164,21 +165,24 @@ Plots and Animates Data
 """
 
 fig, ax = plt.subplots()
+
 ax.set_xlabel("x [arb units]")
 ax.set_ylabel("$|\Psi(x, t)|$", color="C0")
-ax.set_xlim(x_array[0], x_array[-1])
-ax.set_ylim(0, 1.5)
-ax.grid()
 
 ax_twin = ax.twinx()
 ax_twin.plot(x_array, VV, color="C1")
 ax_twin.set_ylabel("V(x) [arb units]", color="C1")
 
 line, = ax.plot([], [], color="C0", lw=2)
+ax.grid()
+xdata, ydata = [], []
 
 def run(psi):
     line.set_data(x_array, np.abs(psi)**2)
     return line,
+
+ax.set_xlim(x_array[0], x_array[-1])
+ax.set_ylim(0, 1)
 
 ani = animation.FuncAnimation(fig, run, psi_list, interval=10)
 
