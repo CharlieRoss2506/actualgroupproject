@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Nov 12 19:14:06 2022
-@author: charlotteharrison
+@authors: charlotteharrison, charlieross, luzsanchezreal, lucacharalambides
 """
 
-
+# if using conda in terminal: conda install -c conda-forge findiff
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
