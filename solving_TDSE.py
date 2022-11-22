@@ -137,5 +137,10 @@ ax.set_ylim(0, 1)
 A better, more cohesive way of viewing the data is with an animation
 '''
 ani = animation.FuncAnimation(fig, run, psi_list, interval=10)
+ani.save("particle_in_a_well.mp4", fps=120, dpi=300) # The code will be saved as an mp4 file
 
 plt.show()
+
+'''
+Hence our animation shows the evolution of the probability density function with time
+'''
