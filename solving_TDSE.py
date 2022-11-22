@@ -13,7 +13,9 @@ from scipy.sparse.linalg import inv
 from scipy.sparse import eye, diags
 import matplotlib.animation as animation
 
-
+'''
+We define our solution to the TDSE as a function, in order to later on be able to use it easily with different sets of input values
+'''
 def solve_TDSE():
     # Inputting parameters, defining space & time variables
     Nx = 250
@@ -163,3 +165,4 @@ def solve_TDSE():
     '''
     Hence our animation shows the evolution of the probability density function with time, inputting simulated data previously created.
     '''
+solve_TDSE() # this now returns our solution to the TDSE for a given array of values.
