@@ -1,0 +1,28 @@
+Group Project: Solving Schrodingers Equation in Python
+
+We aim to solve Schrödinger's equation in 1D for a single particle in a potential well, representing our operator as a matrix.
+We do so by using the Crank-Nicholson Algorithm.
+To start off, we will require the following packages:
+
+numpy
+pandas
+matplotlib
+findiff
+scipy.sparse
+
+[Note that in order to use findiff, you must first run $ conda install -c conda-forge findiff]
+
+Our 2 variables will be space (x) and time (t). We could quite simply apply the TDSE over a grid of values, but we will aim to find a more accurate solution.
+Hence, using np.linspace, we create arrays for both our x and t data points, and input the desired parameters.
+
+We define functions to find the potential from our arrays, taking care to include exceptions for errors from program execution. 
+From this potential, we create a diagonal matrix.
+Using FinDiff, we find the Hamiltonian matrix and apply boundary conditions.
+
+From this we find U, also known as the discretized version of the time propagation operator in the Crank-Nicholson scheme (scipy.sparse needed for eye).
+
+We then calculate psi and print it as a list, together with our initial parameters of space and time. This list is our numerical solution of the simulated data.
+
+To better understand this result, we plot the data in 2D using matplotlib. 
+Choosing to put space on the x-axis and time on the y-axis, we should be able to visualise the probability density.
+Note the probability density should fluctuate back and forth. To better show this, we animate our plot and save it as a video file (mp4).
