@@ -123,7 +123,7 @@ for t in t_array:
             print("\nInvalid response.")
             print("Please enter... y (yes for download) or n (no download).")
 
-download_data(Nx, xmin, xmax, tmin, tmax, V()=VV)   
+download_data(Nx, xmin, xmax, tmin, tmax, V()==VV)   
     
     
 """
