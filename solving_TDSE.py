@@ -124,11 +124,7 @@ for t in t_array:
             print("\nInvalid response.")
             print("Please enter... y (yes for download) or n (no download).")
 
-download_data(Nx, xmin, xmax, tmin, tmax, V()=VV)    
-    
-    
-    
-   
+download_data(Nx, xmin, xmax, tmin, tmax, V()=VV)   
     
     
 """
@@ -165,5 +161,5 @@ ani.save("particle_in_a_well.mp4", fps=120, dpi=300) # The code will be saved as
 plt.show()
 
 '''
-Hence our animation shows the evolution of the probability density function with time
+Hence our animation shows the evolution of the probability density function with time, inputting simulated data previously created.
 '''
