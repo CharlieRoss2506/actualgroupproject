@@ -28,5 +28,5 @@ actualgroupproject/
         └── test_example.py
 |__solving_TDSE.py
 
-
+```
 solving_TDSE, when istalled, will allow the user to call the function solve_TDSE() to return an animation of the wavefunction over time for an inputted potential V(x)
